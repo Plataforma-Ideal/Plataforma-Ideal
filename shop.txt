@@ -1,4 +1,5 @@
 const shop = [
-  { id: 1, img: "shopImgs/1.png", name: "OLÉO DE COCO SALON LINE", desc: "O Óleo de Tratamento S.O.S Cachos Óleo de Coco promove hidratação profunda, emoliência e selamento dos fios. Além disso, deixa o cabelo mais nutrido, macio e com brilho extremo.", link: "https://s.shopee.com.br/8Kk7IReXll"},
+  { id: 1, img: "shopImgs/1.png", name: "OLÉO DE COCO SALON LINE", desc: "O Óleo de Tratamento S.O.S Cachos Óleo de Coco promove hidratação profunda, emoliência e selamento dos fios. Além disso, deixa o cabelo mais nutrido, macio e com brilho extremo.", link: "https://pay.kiwify.com.br/xmyj4qK"},
     
 ];
+
