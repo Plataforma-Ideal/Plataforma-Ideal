@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="inicio.css">
+  <title>PLATAFORMA IDEAL | SITE</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#010310">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+:root {
+  --primary: #3D5AFE;
+  --primary-hover: #536DFE;
+  --bg-dark: #010310;
+  --bg-card: #12132C;
+  --bg-item: #001326;
+  --text: #FFFFFF;
+  --text-dim: #A0A0A0;
+  --accent: #FF5722;
+  --nav-bg: rgba(18, 19, 44, 0.9);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* { 
+  box-sizing: border-box; 
+  -webkit-tap-highlight-color: transparent; 
+  outline: none; 
+}
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(1, 3, 16, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(61, 90, 254, 0.1);
+}
+.search-container {
+  background: var(--primary);
+  border-radius: 16px;
+  padding: 2px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.search-inner {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#pesquisa {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1rem;
+  flex: 1;
+  height: 45px;
+}
+#pesquisa::placeholder { color: var(--text-dim); }
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 130px 20px 100px;
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.container.active { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+.container.no-padding { 
+  padding-top: 40px; 
+}
+h1 { 
+  font-size: 1.5rem; 
+  font-weight: 700;
+  margin-bottom: 2rem; 
+  border-left: 5px solid var(--primary);
+  padding-left: 15px;
+  text-transform: uppercase;
+}
+.item {
+  background: linear-gradient(90deg, var(--primary) 0%, rgba(61, 90, 254, 0) 100%);
+  border-radius: 12px;
+  padding: 1px;
+  margin-bottom: 15px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.item:hover { 
+  transform: translateX(5px); 
+}
+.item:active { 
+  transform: scale(0.97); 
+}
+.item-content {
+  background: var(--bg-item);
+  border-radius: 11px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.number { 
+  color: var(--accent); 
+  font-weight: 900; 
+  font-size: 1.1rem; 
+  min-width: 40px; 
+}
+.nome { 
+  flex: 1; 
+  font-weight: 600; 
+  font-size: 1rem; 
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid rgba(61, 90, 254, 0.2);
+  text-align: center;
+  transition: var(--transition);
+}
+.card img { 
+  width: 100%; 
+  aspect-ratio: 1/1; 
+  object-fit: cover; 
+  border-radius: 15px; 
+  margin-bottom: 12px; 
+}
+.buy-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px var(--primary);
+}
+.buy-btn:hover {
+  background: var(--primary);
+  box-shadow: 0 0 25px var(--primary);
+  transform: scale(1.02);
+}
+.buy-btn:hover {
+  background: var(--primary-hover);
+}
+.bottom-nav {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 450px;
+  height: 65px;
+  background: var(--bg-card);
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1001;
+  overflow: hidden; 
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+.bottom-nav::before {
+  content: '';
+  position: absolute;
+  width: 150%; 
+  height: 500%;
+  background: conic-gradient(
+    transparent, 
+    var(--primary), 
+    transparent 30%
+  );
+  animation: rotate-border 3s linear infinite;
+  z-index: 0;
+}
+.bottom-nav::after {
+  content: '';
+  position: absolute;
+  inset: 2px; 
+  background: var(--bg-card);
+  border-radius: 22px;
+  z-index: 1;
+}
+@keyframes rotate-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.bottom-nav button {
+  position: relative;
+  z-index: 10;
+  background: none;
+  border: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: var(--transition);
+}
+.bottom-nav button img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+.bottom-nav button.active {
+  color: var(--primary);
+}
+.bottom-nav button.active img {
+  filter: drop-shadow(0 0 5px var(--primary));
+  transform: translateY(-2px);
+}
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+}
+.bottom-nav button img { 
+  width: 26px; 
+  height: 26px; 
+  opacity: 0.5; 
+  transition: var(--transition);
+}
+.bottom-nav button.active { 
+  color: var(--primary); 
+}
+.bottom-nav button.active img { 
+  opacity: 1; 
+  filter: drop-shadow(0 0 8px var(--primary)); 
+}
+p.mais-produtos {
+  font-weight: 800;
+  margin: 30px 0 15px;
+  text-align: center;
+  color: var(--primary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+@keyframes skeleton-loading {
+      0% { background-color: #0a0c20; }
+      50% { background-color: #1a1d3a; }
+      100% { background-color: #0a0c20; }
+    }
+    .skeleton-card { background: #0a0c20; border-radius: 15px; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+    .skeleton-img, .skeleton-text, .skeleton-btn, .skeleton-list { animation: skeleton-loading 1.5s infinite ease-in-out; border-radius: 10px; }
+    .skeleton-img { width: 100%; aspect-ratio: 1/1; }
+    .skeleton-text { height: 15px; width: 80%; }
+    .skeleton-btn { height: 40px; width: 100%; }
+    .skeleton-list { height: 60px; margin-bottom: 15px; }
+    .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 15px; }
+    .list-layout { display: flex; flex-direction: column; gap: 10px; padding: 15px; }
+    .divisor-busca {
+      font-weight: 800;
+      margin: 20px 0 10px;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      padding-left: 5px;
+    }
+    .loading-trigger { text-align: center; padding: 20px; color: var(--primary); font-weight: bold; width: 100%; }
+    .card { overflow: visible !important; }
+  </style>
+</head>
+<body>
+  <div class="top-bar" id="main-top-bar">
+    <div class="search-container">
+      <div class="search-inner">
+        <input id="pesquisa" type="text" placeholder="Número ou nome do produto">
+        <button id="search-button" class="search-button" style="background:none; border:none; cursor:pointer;">
+          <img src="Past_inicio
+/Imgs/search.png" alt="Buscar" style="width:24px;">
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="main-container">
+    <h1 id="page-title"></h1>
+    <div id="itens"></div>
+    <div id="loading-anchor" class="loading-trigger" style="display:none;">Carregando mais...</div>
+  </div>
+  <nav class="bottom-nav">
+    <button id="nav-search"><img src="Past_inicio
+/Imgs/search.png"><span>PESQUISAR</span></button>
+    <button id="nav-shop"><img src="Past_inicio
+/Imgs/shop.png"><span>PRODUTOS</span></button>
+    <button id="nav-book"><img src="Past_inicio
+/Imgs/book.png"><span>LIVROS</span></button>
+  </nav>
+<script>
+  let itens = [], livros = [], shop = [];
+  let listaFiltrada = [];
+  let modoAtual = 'produtos';
+  let itensExibidos = 0;
+  let requestCount = 0;
+  let pesquisandoAtivo = false;
+  let destaquePorID = false;
+  const inicialPorVez = 50; 
+  const incrementoScroll = 20;
+  let carregando = false;
+  const ui = {
+    container: document.getElementById('main-container'),
+    topBar: document.getElementById('main-top-bar'),
+    pageTitle: document.getElementById('page-title'),
+    itensContainer: document.getElementById('itens'),
+    pesquisaInput: document.getElementById('pesquisa'),
+    loadingAnchor: document.getElementById('loading-anchor'),
+    btnSearch: document.getElementById('search-button')
+  };
+  async function carregarArquivo(caminho, nomeVar, destino) {
+    try {
+      const r = await fetch(caminho);
+      const t = await r.text();
+      const dados = new Function(`${t}; return ${nomeVar};`)();
+      if (destino === 'itens') itens = dados;
+      else if (destino === 'livros') livros = dados;
+      else if (destino === 'shop') shop = dados;
+    } catch (e) { console.error("Erro ao carregar:", e); }
+  }
+  function gerarSkeletons(qtd) {
+    if (modoAtual === 'shop') return Array(qtd).fill(`<div class="skeleton-card"><div class="skeleton-img"></div><div class="skeleton-text"></div><div class="skeleton-btn"></div></div>`).join('');
+    return Array(qtd).fill(`<div class="skeleton-list"></div>`).join('');
+  }
+  function renderizarConteudo(append = false) {
+  if (!append) { carregando = false; requestCount++; }
+  if (carregando) return;
+  carregando = true;
+  const currentRequest = requestCount;
+  let listaFonte = pesquisandoAtivo ? listaFiltrada : (modoAtual === 'shop' ? shop : (modoAtual === 'livros' ? livros : itens));
+  if (!append) {
+    ui.itensContainer.innerHTML = `<div id="display-wrapper"></div>`;
+    const wrapper = document.getElementById('display-wrapper');
+    wrapper.className = (modoAtual === 'shop') ? 'shop-grid' : 'list-layout';
+    wrapper.innerHTML = gerarSkeletons(8);
+    itensExibidos = 0;
+  }
+  const wrapper = document.getElementById('display-wrapper');
+  setTimeout(() => {
+    if (currentRequest !== requestCount) return;
+    if (!append) wrapper.innerHTML = '';
+    const temp = document.getElementById('temp-skeletons');
+    if (temp) temp.remove();
+    const limite = (itensExibidos === 0) ? inicialPorVez : incrementoScroll;
+    const proximoLote = listaFonte.slice(itensExibidos, itensExibidos + limite);
+    let html = '';
+    proximoLote.forEach((item, index) => {
+      const nome = item.name || item.nome || "Sem nome";
+      if (destaquePorID && !append && index === 0) {
+         html += `
+          <div class="item" style="border-left: 5px solid var(--primary); background: rgba(61, 90, 254, 0.05);">
+            <div class="item-content">
+              <span class="number">#${item.id}</span>
+              <span class="nome">${nome}</span>
+              <img class="details" src="Past_inicio
+/Imgs/details.png" style="width:24px;">
+            </div>
+          </div>
+          <div class="divisor-busca">Mais ${modoAtual}:</div>`;
+      } else {
+        if (modoAtual === 'shop') {
+          html += `
+            <div class="card">
+              <img src="${item.img || 'default.png'}" loading="lazy">
+              <p class="card-text">${nome}</p>
+              <button class="buy-btn" data-link="${item.link}">COMPRAR</button>
+            </div>`;
+        } else {
+          html += `
+            <div class="item">
+              <div class="item-content">
+                <span class="number">#${item.id}</span>
+                <span class="nome">${nome}</span>
+                <img class="details" src="Past_inicio
+/Imgs/details.png" style="width:24px;">
+              </div>
+            </div>`;
+        }
+      }
+    });
+    wrapper.innerHTML += html;
+    itensExibidos += proximoLote.length;
+    carregando = false;
+    ui.loadingAnchor.style.display = (itensExibidos < listaFonte.length) ? 'block' : 'none';
+  }, 400);
+}
+  function executarPesquisa(termoForcado = null) {
+    let termo = termoForcado !== null ? termoForcado.toLowerCase() : ui.pesquisaInput.value.trim().toLowerCase();
+    if (termo === '' || termo === 'n' || termo === '#') {
+      pesquisandoAtivo = false;
+      destaquePorID = false;
+      ui.pesquisaInput.value = '';
+      renderizarConteudo();
+      return;
+    }
+    const base = (modoAtual === 'livros') ? livros : itens;
+    const idLimpoMatch = termo.match(/#?(\d+)/);
+    const idBusca = idLimpoMatch ? parseInt(idLimpoMatch[1]) : null;
+    const itemExato = base.find(i => i.id === idBusca || (i.id_aleatory && i.id_aleatory.toLowerCase() === termo.replace('#','')));
+    if (itemExato) {
+      pesquisandoAtivo = true;
+      destaquePorID = true;
+      ui.pesquisaInput.value = `#${itemExato.id}`;
+      const outros = base.filter(i => i.id !== itemExato.id);
+      listaFiltrada = [itemExato, ...outros];
+    } else {
+      destaquePorID = false; 
+      listaFiltrada = base.filter(i => (i.nome || i.name || "").toLowerCase().includes(termo.replace('#', '')));
+      pesquisandoAtivo = listaFiltrada.length > 0;
+    }
+    renderizarConteudo();
+  }
+  function configurarLayout(modo, query = null) {
+    modoAtual = modo;
+    pesquisandoAtivo = false;
+    destaquePorID = false;
+    document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
+    if (modo === 'shop') {
+      ui.topBar.style.transform = 'translateY(-150%)';
+      ui.pageTitle.style.display = 'none';
+      ui.container.classList.add('no-padding');
+      document.getElementById('nav-shop').classList.add('active');
+    } else {
+      ui.topBar.style.transform = 'translateY(0)';
+      ui.pageTitle.style.display = 'block';
+      ui.container.classList.remove('no-padding');
+      ui.pageTitle.textContent = (modo === 'livros') ? 'LIVROS:' : 'PRODUTOS:';
+      document.getElementById(modo === 'livros' ? 'nav-book' : 'nav-search').classList.add('active');
+      if (query && query !== 'n') {
+        executarPesquisa(query);
+        return;
+      } else {
+        ui.pesquisaInput.value = '';
+      }
+    }
+    renderizarConteudo();
+  }
+  window.addEventListener('scroll', () => {
+    if (carregando) return;
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 600) {
+      let lista = pesquisandoAtivo ? listaFiltrada : (modoAtual === 'shop' ? shop : (modoAtual === 'livros' ? livros : itens));
+      if (itensExibidos < lista.length) {
+        const wrapper = document.getElementById('display-wrapper');
+        const temp = document.createElement('div');
+        temp.id = 'temp-skeletons';
+        temp.style.display = 'contents';
+        temp.innerHTML = gerarSkeletons(4);
+        wrapper.appendChild(temp);
+        renderizarConteudo(true);
+      }
+    }
+  });
+  function verificarHash() {
+    const hash = window.location.hash.substring(1);
+    if (hash.startsWith('search:')) {
+      configurarLayout('produtos', hash.split(':')[1]);
+    } else if (hash.startsWith('livro:')) {
+      configurarLayout('livros', hash.split(':')[1]);
+    } else if (hash === 'inicio') {
+      configurarLayout('shop');
+    } else {
+      configurarLayout('produtos');
+    }
+    setTimeout(() => ui.container.classList.add('active'), 50);
+  }
+  Promise.all([
+    carregarArquivo('Json/produtos.txt', 'itens', 'itens'), 
+    carregarArquivo('Json/livros.txt', 'livros', 'livros'),
+    carregarArquivo('Json/shop.txt', 'shop', 'shop')
+  ]).then(verificarHash);
+  document.getElementById('nav-search').onclick = () => window.location.hash = 'search:n';
+  document.getElementById('nav-shop').onclick = () => window.location.hash = 'inicio';
+  document.getElementById('nav-book').onclick = () => window.location.hash = 'livro:n';
+  ui.btnSearch.onclick = () => executarPesquisa();
+  ui.pesquisaInput.onkeyup = (e) => { if (e.key === 'Enter') executarPesquisa(); };
+  window.onhashchange = verificarHash;
+  ui.itensContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('buy-btn')) {
+    const link = e.target.getAttribute('data-link');
+    if (link && link !== "undefined") {
+      window.open(link, '_blank');
+    } else {
+      console.warn("Link não encontrado para este produto.");
+    }
+  }
+});
+
+</script>
+</body>
+</html>

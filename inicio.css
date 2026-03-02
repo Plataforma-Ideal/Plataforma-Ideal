@@ -1,0 +1,326 @@
+
+:root {
+  --primary: #3D5AFE;
+  --primary-hover: #536DFE;
+  --bg-dark: #010310;
+  --bg-card: #12132C;
+  --bg-item: #001326;
+  --text: #FFFFFF;
+  --text-dim: #A0A0A0;
+  --accent: #FF5722;
+  --nav-bg: rgba(18, 19, 44, 0.9);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { 
+  box-sizing: border-box; 
+  -webkit-tap-highlight-color: transparent; 
+  outline: none; 
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Barra Superior com Glassmorphism */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(1, 3, 16, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(61, 90, 254, 0.1);
+}
+
+.search-container {
+  background: var(--primary);
+  border-radius: 16px;
+  padding: 2px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.search-inner {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#pesquisa {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1rem;
+  flex: 1;
+  height: 45px;
+}
+
+#pesquisa::placeholder { color: var(--text-dim); }
+
+/* Container Principal com Animação de Entrada */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 130px 20px 100px;
+  min-height: 100vh;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.container.active { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.container.no-padding { 
+  padding-top: 40px; 
+}
+
+h1 { 
+  font-size: 1.5rem; 
+  font-weight: 700;
+  margin-bottom: 2rem; 
+  border-left: 5px solid var(--primary);
+  padding-left: 15px;
+  text-transform: uppercase;
+}
+
+/* Cartões de Itens (Lista) */
+.item {
+  background: linear-gradient(90deg, var(--primary) 0%, rgba(61, 90, 254, 0) 100%);
+  border-radius: 12px;
+  padding: 1px;
+  margin-bottom: 15px;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.item:hover { 
+  transform: translateX(5px); 
+}
+
+.item:active { 
+  transform: scale(0.97); 
+}
+
+.item-content {
+  background: var(--bg-item);
+  border-radius: 11px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.number { 
+  color: var(--accent); 
+  font-weight: 900; 
+  font-size: 1.1rem; 
+  min-width: 40px; 
+}
+
+.nome { 
+  flex: 1; 
+  font-weight: 600; 
+  font-size: 1rem; 
+}
+
+/* Grelha da Loja (Shop) */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid rgba(61, 90, 254, 0.2);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.card img { 
+  width: 100%; 
+  aspect-ratio: 1/1; 
+  object-fit: cover; 
+  border-radius: 15px; 
+  margin-bottom: 12px; 
+}
+
+.buy-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Mudamos para 'all' para animar o glow também */
+  
+  /* Efeito de Glow */
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.buy-btn:hover {
+  background: var(--primary);
+  /* Aumenta o brilho no hover */
+  box-shadow: 0 0 25px var(--primary);
+  transform: scale(1.02); /* Dá um leve pulo para frente */
+}
+
+
+.buy-btn:hover {
+  background: var(--primary-hover);
+}
+
+/* Container principal do Menu */
+.bottom-nav {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 450px;
+  height: 65px;
+  background: var(--bg-card); /* Cor de fundo base */
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1001;
+  
+  /* Essencial para o efeito */
+  overflow: hidden; 
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+/* O "Raio" de luz que gira atrás */
+.bottom-nav::before {
+  content: '';
+  position: absolute;
+  width: 150%; 
+  height: 500%; /* Altura maior para garantir que cubra as curvas */
+  background: conic-gradient(
+    transparent, 
+    var(--primary), 
+    transparent 30%
+  );
+  animation: rotate-border 3s linear infinite;
+  z-index: 0;
+}
+
+/* A "Capa" que fica por cima para criar o caminho da borda */
+.bottom-nav::after {
+  content: '';
+  position: absolute;
+  /* Define a espessura da borda (ex: 2px) */
+  inset: 2px; 
+  background: var(--bg-card);
+  border-radius: 22px; /* Raio ligeiramente menor que o externo */
+  z-index: 1;
+  /* Se quiser o efeito de vidro dentro da borda, descomente abaixo: */
+  /* backdrop-filter: blur(20px); 
+     background: rgba(18, 19, 44, 0.8); */
+}
+
+/* Animação de Rotação 360º */
+@keyframes rotate-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Garante que os botões fiquem acima de todo o efeito */
+.bottom-nav button {
+  position: relative;
+  z-index: 10; /* Acima do ::after */
+  background: none;
+  border: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: var(--transition);
+}
+
+.bottom-nav button img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s;
+}
+
+.bottom-nav button.active {
+  color: var(--primary);
+}
+
+.bottom-nav button.active img {
+  filter: drop-shadow(0 0 5px var(--primary));
+  transform: translateY(-2px);
+}
+
+
+
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+}
+
+.bottom-nav button img { 
+  width: 26px; 
+  height: 26px; 
+  opacity: 0.5; 
+  transition: var(--transition);
+}
+
+.bottom-nav button.active { 
+  color: var(--primary); 
+}
+
+.bottom-nav button.active img { 
+  opacity: 1; 
+  filter: drop-shadow(0 0 8px var(--primary)); 
+}
+
+p.mais-produtos {
+  font-weight: 800;
+  margin: 30px 0 15px;
+  text-align: center;
+  color: var(--primary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+

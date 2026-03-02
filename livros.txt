@@ -1,0 +1,3 @@
+const livros = [
+ //{ id: 1, id_aleatory: "LIV1", nome: 'Livro A', details: '[]' },
+];

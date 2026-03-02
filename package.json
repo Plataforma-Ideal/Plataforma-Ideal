@@ -1,0 +1,13 @@
+{
+  "name": "destakshop",
+  "version": "1.0.0",
+  "description": "destakshop",
+  "main": "index.html",
+  "scripts": {
+    "start": "nodemon s.js"
+  },
+  "keywords": [],
+  "author": "destakshop",
+  "license": "ISC",
+  "type": "commonjs"
+}
