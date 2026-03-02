@@ -504,7 +504,7 @@ p.mais-produtos {
     setTimeout(() => ui.container.classList.add('active'), 50);
   }
   Promise.all([
-    carregarArquivo('Json/produtos.txt', 'itens', 'itens'), 
+    carregarArquivo('produtos.txt', 'itens', 'itens'), 
     carregarArquivo('Json/livros.txt', 'livros', 'livros'),
     carregarArquivo('Json/shop.txt', 'shop', 'shop')
   ]).then(verificarHash);
@@ -527,4 +527,5 @@ p.mais-produtos {
 
 </script>
 </body>
+
 </html>
