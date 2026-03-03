@@ -505,8 +505,8 @@ p.mais-produtos {
   }
   Promise.all([
     carregarArquivo('produtos.txt', 'itens', 'itens'), 
-    carregarArquivo('Json/livros.txt', 'livros', 'livros'),
-    carregarArquivo('Json/shop.txt', 'shop', 'shop')
+    carregarArquivo('livros.txt', 'livros', 'livros'),
+    carregarArquivo('shop.txt', 'shop', 'shop')
   ]).then(verificarHash);
   document.getElementById('nav-search').onclick = () => window.location.hash = 'search:n';
   document.getElementById('nav-shop').onclick = () => window.location.hash = 'inicio';
@@ -529,3 +529,4 @@ p.mais-produtos {
 </body>
 
 </html>
+
